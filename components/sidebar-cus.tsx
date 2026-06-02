@@ -38,12 +38,12 @@ export function CustomerSidebar() {
       <SidebarContent className="bg-[#FDFBF7]">
         
         {/* Header Branding */}
-        <div className="p-6">
+        <div className="p-6 border-b border-[#9C6D44]/20">
           <h2 className="text-xl font-serif font-bold text-[#4A3525] tracking-wide">
             The Neighbourhood
           </h2>
           <p className="text-[10px] uppercase tracking-widest text-[#9C6D44] font-sans font-semibold mt-1">
-            Admin Portal
+            Customer Portal
           </p>
         </div>
 
@@ -82,10 +82,10 @@ export function CustomerSidebar() {
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <Link href="/customer/reservationreport">
+                <Link href="/customer/reservationstatus">
                   <SidebarMenuButton className="text-[#4A3525] hover:bg-[#EFE9D3]">
                     <FileText size={18} />
-                    <span>Reservation Report</span>
+                    <span>Reservation Status</span>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
