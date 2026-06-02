@@ -82,24 +82,7 @@ export function AppSidebar() {
                 </Link>
               </SidebarMenuItem>
 
-              <SidebarMenuItem>
-                <Link href="/admin/usermanagement">
-                  <SidebarMenuButton className="text-[#4A3525] hover:bg-[#EFE9D3]">
-                    <Users size={18} />
-                    <span>User Management</span>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <Link href="/admin/reservationreport">
-                  <SidebarMenuButton className="text-[#4A3525] hover:bg-[#EFE9D3]">
-                    <FileText size={18} />
-                    <span>Reservation Report</span>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-
+    
               <SidebarMenuItem>
                 <Link href="/admin/transaksi">
                   <SidebarMenuButton className="text-[#4A3525] hover:bg-[#EFE9D3]">

@@ -22,7 +22,7 @@ export default function AdminMenuManagement() {
     setError(null);
     setIsLoading(true);
     try {
-      const token = await getCookies("token");
+      const token = await getCookies("token_kuliner");
       
       if (!token) {
         setError("Token not found");
