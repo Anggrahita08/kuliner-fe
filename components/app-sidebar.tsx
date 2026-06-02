@@ -39,7 +39,7 @@ export function AppSidebar() {
       <SidebarContent className="bg-[#FDFBF7]">
         
         {/* Header Branding */}
-        <div className="p-6">
+        <div className="p-6 border-b border-[#9C6D44]/50">
           <h2 className="text-xl font-serif font-bold text-[#4A3525] tracking-wide">
             The Neighbourhood
           </h2>
