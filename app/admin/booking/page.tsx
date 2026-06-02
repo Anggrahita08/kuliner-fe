@@ -200,6 +200,9 @@ export default function AdminBookingPage() {
   const cancelledCount = bookings.filter((b) =>
     ["cancelled", "canceled"].includes(b.status?.toLowerCase())
   ).length;
+  const needVerifCount = bookings.filter((b) =>
+    ["pending_verification", "uploaded"].includes(getPaymentStatus(b).toLowerCase())
+  ).length;
 
   return (
     <div className="p-6 md:p-8 bg-[#FDFBF7] min-h-screen text-[#5C321A]">
@@ -219,11 +222,12 @@ export default function AdminBookingPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {[
           { label: "Pending", value: pendingCount, color: "text-yellow-600", filter: "pending" },
           { label: "Confirmed", value: confirmedCount, color: "text-green-600", filter: "confirmed" },
           { label: "Cancelled", value: cancelledCount, color: "text-red-500", filter: "cancelled" },
+          { label: "Need Verification", value: needVerifCount, color: "text-orange-600", filter: "need_verification" },
         ].map((c) => (
           <button
             key={c.label}

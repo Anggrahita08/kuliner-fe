@@ -1,85 +1,105 @@
 "use client";
 
-import { CheckCircle2, AlertCircle, ArrowLeft, CalendarCheck } from "lucide-react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { CheckCircle, Calendar, Clock, Users, MapPin, ArrowLeft } from "lucide-react";
 
-export default function SuccessPage() {
+export default function BookingSuccessPage() {
+  const router = useRouter();
+  const [bookingData, setBookingData] = useState<any>(null);
+
+  useEffect(() => {
+    const data = localStorage.getItem("bookingData");
+    if (data) {
+      setBookingData(JSON.parse(data));
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FDFBF7] to-[#F8F5EE] flex items-center justify-center p-4">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-[#96683E]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#4A3525]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      
-      <div className="relative bg-white rounded-2xl border border-[#96683E]/10 shadow-xl max-w-md w-full overflow-hidden">
-        {/* Top accent bar */}
-        <div className="h-1.5 bg-gradient-to-r from-[#96683E] to-[#5C321A]" />
-        
-        <div className="p-8">
-          {/* Success icon with animation */}
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center animate-in zoom-in duration-300">
-              <CheckCircle2 size={48} className="text-green-600" />
+    <div className="min-h-screen bg-[#FDFBF7] py-12 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-[#96683E]/20">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 text-center">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-10 h-10 text-green-600" />
             </div>
+            <h1 className="text-2xl font-bold text-[#4A3525]">Booking Berhasil!</h1>
+            <p className="text-[#96683E] mt-2">Reservasi kamu telah berhasil dibuat</p>
           </div>
 
-          <h1 className="text-2xl font-serif font-bold text-[#4A3525] text-center mb-2">
-            Booking Berhasil!
-          </h1>
-          <p className="text-[#96683E] text-center mb-6">
-            Reservasi kamu telah berhasil dibuat
-          </p>
-
-          {/* Status card */}
-          <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-5 mb-6">
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center shrink-0">
-                <CalendarCheck size={16} className="text-amber-600" />
-              </div>
-              <div className="flex-1">
-                <p className="text-xs text-amber-600 uppercase tracking-wide mb-1">Status Booking</p>
-                <p className="text-amber-800 font-bold text-lg flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 bg-amber-500 rounded-full animate-pulse" />
+          <div className="p-6">
+            <div className="bg-yellow-50 rounded-xl p-4 mb-6 border border-yellow-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-bold text-[#4A3525]">STATUS BOOKING</span>
+                <span className="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">
                   Menunggu Konfirmasi
-                </p>
-                <p className="text-sm text-amber-700/80 mt-2">
-                  Admin akan mengonfirmasi booking kamu dalam waktu dekat.
-                </p>
+                </span>
               </div>
+              <p className="text-sm text-[#96683E]">
+                Admin akan mengkonfirmasi booking kamu dalam waktu dekat.
+              </p>
             </div>
-          </div>
 
-          {/* Informasi tambahan */}
-          <div className="bg-[#FDFBF7] rounded-xl p-4 mb-6 border border-[#96683E]/10">
-            <div className="flex items-center gap-2 text-xs text-[#96683E] mb-2">
-              <AlertCircle size={12} />
-              <span>Informasi Penting</span>
+            {bookingData && (
+              <div className="space-y-3 mb-6">
+                <h3 className="font-bold text-[#4A3525] mb-3">Detail Reservasi</h3>
+                
+                <div className="flex items-center gap-3 text-sm">
+                  <Calendar className="w-5 h-5 text-[#96683E]" />
+                  <span className="text-gray-600">Tanggal:</span>
+                  <span className="font-medium text-[#4A3525]">{bookingData.date}</span>
+                </div>
+                
+                <div className="flex items-center gap-3 text-sm">
+                  <Clock className="w-5 h-5 text-[#96683E]" />
+                  <span className="text-gray-600">Waktu:</span>
+                  <span className="font-medium text-[#4A3525]">{bookingData.time}</span>
+                </div>
+                
+                <div className="flex items-center gap-3 text-sm">
+                  <Users className="w-5 h-5 text-[#96683E]" />
+                  <span className="text-gray-600">Jumlah Tamu:</span>
+                  <span className="font-medium text-[#4A3525]">{bookingData.guests} orang</span>
+                </div>
+                
+                <div className="flex items-center gap-3 text-sm">
+                  <MapPin className="w-5 h-5 text-[#96683E]" />
+                  <span className="text-gray-600">Meja:</span>
+                  <span className="font-medium text-[#4A3525]">#1</span>
+                </div>
+              </div>
+            )}
+
+            <div className="bg-blue-50 rounded-xl p-4 mb-6 border border-blue-200">
+              <h4 className="font-bold text-[#4A3525] text-sm mb-2">Informasi Penting</h4>
+              <ul className="text-xs text-[#96683E] space-y-1 list-disc list-inside">
+                <li>Silakan cek status reservasi secara berkala</li>
+                <li>Konfirmasi akan dikirim melalui notifikasi</li>
+                <li>Hubungi restoran jika ada perubahan jadwal</li>
+              </ul>
             </div>
-            <ul className="text-xs text-[#4A3525]/70 space-y-1.5 ml-5 list-disc">
-              <li>Silakan cek status reservasi secara berkala</li>
-              <li>Konfirmasi akan dikirim melalui notifikasi</li>
-              <li>Hubungi restoran jika ada perubahan jadwal</li>
-            </ul>
-          </div>
-          
-          {/* Action buttons */}
-          <div className="space-y-3">
-            <Link href="/customer/reservationstatus" className="block">
-              <button className="w-full bg-[#4A3525] text-white py-3 rounded-xl font-bold hover:bg-[#2e2117] transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => router.push("/customer/reservationstatus")}
+                className="w-full py-3 bg-[#96683E] text-white rounded-xl font-bold hover:bg-[#5C321A] transition"
+              >
                 Lihat Reservasi Saya
               </button>
-            </Link>
-            <Link href="/customer/dashboard" className="block">
-              <button className="w-full bg-white text-[#96683E] border-2 border-[#96683E]/30 py-3 rounded-xl font-bold hover:bg-[#FDFBF7] hover:border-[#96683E] transition-all duration-200 flex items-center justify-center gap-2">
-                <ArrowLeft size={16} />
+              
+              <button
+                onClick={() => router.push("/customer/dashboard")}
+                className="w-full py-3 border border-[#96683E] text-[#96683E] rounded-xl font-bold hover:bg-[#EFE9D3] transition flex items-center justify-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
                 Kembali ke Dashboard
               </button>
-            </Link>
-          </div>
+            </div>
 
-          {/* Booking ID hint */}
-          <p className="text-center text-[10px] text-[#96683E]/40 mt-6">
-            Simpan bukti booking untuk referensi
-          </p>
+            <p className="text-center text-xs text-gray-400 mt-6">
+              Simpan bukti booking untuk referensi
+            </p>
+          </div>
         </div>
       </div>
     </div>
